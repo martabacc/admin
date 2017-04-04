@@ -1,0 +1,142 @@
+
+
+/*access the variables in the following manner
+ * AFTER the Studio Enabler is initialized.*/
+if (!Enabler.isInitialized()) {
+  Enabler.addEventListener(
+    studio.events.StudioEvent.INIT,
+    enablerInitialized);
+} else {
+   enablerInitialized();
+}
+function enablerInitialized() {
+  // Enabler initialized.
+  // In App ads are rendered offscreen so animation should wait for
+  // the visible event. These are simulated with delays in the local
+  // environment.
+  if (!Enabler.isVisible()) {
+        Enabler.addEventListener(studio.events.StudioEvent.VISIBLE,adVisible);
+  } else {
+     adVisible();
+  }
+}
+email1 = dynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].F2_txt_email_1;
+email2 = dynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].F2_txt_email_2;
+/*TYPE.JS
+-----------------*/
+function newTyped(){
+    $("#typed").typed({
+        strings: [email1,email2],//["puppyscrubbers@gmail.com", "tim@gizmacam.com"],
+        typeSpeed: 38,
+        backDelay: 1900,
+        loop: false,
+        contentType: 'html', // or text
+        // defaults to false for infinite loop
+        loopCount: true,
+        callback: function(){ 
+            //Delay fading
+            setTimeout(func, 2200); 
+            function func() {
+                //alert('Do stuff here');
+                $("#typed").typed('reset');
+            }
+
+        }
+        //resetCallback: function() { newTyped(); }
+    });
+    
+/*
+    $(".reset").click(function(){
+        $("#typed").typed('reset');
+    });
+*/
+
+};
+
+
+function adVisible() {
+  // Ad visible, start ad/animation.
+  $('#entpreload').css('visibility','hidden');
+  
+  var tl = new TimelineMax({repeat:1, repeatDelay:3});
+  
+  /*Frame1 - Change to visible*/
+  tl.to($('#entwhitebg'), 0, {autoAlpha:1});
+  
+  /**/
+  tl.to($('#enttxtgmail'), 0, {autoAlpha:1});
+  //tl.to($('#enttxtinbox'), 0, {autoAlpha:1});
+  //tl.to($('#enttxtimportant'), 0, {autoAlpha:1});
+  //tl.to($('#enttxtchats'), 0, {autoAlpha:1});
+  tl.to($('#entpanel'), 0, {autoAlpha:1});
+  tl.to($('#entarrow'), 0, {autoAlpha:1});
+  tl.to($('#red-button'), 0, {autoAlpha:1});
+  tl.to($('#entcursor'), 0, {autoAlpha:1});
+  //tl.to($('#red-indicator'), 0, {autoAlpha:1});
+  tl.to($('.hr1'), 0, {autoAlpha:1});
+
+  /*Cursor click animation*/
+  tl.to($('#entcursor'), 0.5, {top:55, left:110, ease:SteppedEase.easeOut, delay:0.7});
+  tl.to($('#red-button'), 0, {css:{backgroundColor:"#C53727",border:"1px solid #B0281A"}, ease:Power2.easeOut});
+  tl.to($('#red-button-highlight'), 0.5, {autoAlpha:1,ease:SteppedEase.easeOut});
+  tl.to($('#red-button-highlight'), 0.5, {autoAlpha:0,ease:SteppedEase.easeOut});
+
+  /*Frame1 - Hide*/
+  /**/
+  tl.to($('#enttxtgmail'), 0, {autoAlpha:0});
+  //tl.to($('#enttxtinbox'), 0, {autoAlpha:0});
+  //tl.to($('#enttxtimportant'), 0, {autoAlpha:0});
+  //tl.to($('#enttxtchats'), 0, {autoAlpha:0});
+  tl.to($('#entpanel'), 0, {autoAlpha:0});
+  tl.to($('#entarrow'), 0, {autoAlpha:0});
+  tl.to($('#red-button'), 0, {autoAlpha:0});
+  tl.to($('#entcursor'), 0, {autoAlpha:0});
+  //tl.to($('#red-indicator'), 0, {autoAlpha:0});
+  tl.to($('.hr1'), 0, {autoAlpha:0});
+
+  /*Frame2 - Change to visible*/
+  /**/
+  tl.to($('#maskofhighlight'), 0, {autoAlpha:1});
+  tl.to($('#entheader'), 0, {autoAlpha:1});
+  tl.to($('#enttxtnewmsg'), 0, {autoAlpha:1});
+  tl.to($('#enttxtto'), 0, {autoAlpha:1});
+  tl.to($('#enttxtsubject'), 0, {autoAlpha:1});
+  tl.to($('.hr2'), 0, {autoAlpha:1});
+  tl.to($('.hr3'), 0, {autoAlpha:1}); 
+  tl.addCallback(newTyped, 2.25); //works!
+
+  /*Frame2 - Hide*/
+  /**/
+  tl.to($('#entwhitebg'), 0, {autoAlpha:0,ease:SteppedEase.easeOut,delay:9.0});
+  tl.to($('#entheader'), 0, {autoAlpha:0,ease:SteppedEase.easeOut});
+  tl.to($('#enttxtnewmsg'), 0, {autoAlpha:0,ease:SteppedEase.easeOut});
+  tl.to($('#cursor'), 0, {autoAlpha:0,ease:SteppedEase.easeOut});
+  tl.to($('#enttxtto'), 0, {autoAlpha:0,ease:SteppedEase.easeOut});
+  tl.to($('#enttxtsubject'), 0, {autoAlpha:0,ease:SteppedEase.easeOut});
+  tl.to($('.hr2'), 0, {autoAlpha:0,ease:SteppedEase.easeOut});
+  tl.to($('.hr3'), 0, {autoAlpha:0,ease:SteppedEase.easeOut});
+  tl.to($('#hightlightpuppywhite'), 0, {autoAlpha:0,ease:SteppedEase.easeOut});
+  tl.to($('#maskpuppyblack'), 0, {autoAlpha:0,ease:SteppedEase.easeOut});
+  tl.to($('#puppyblack'), 0, {autoAlpha:0,ease:SteppedEase.easeOut});
+  tl.to($('#puppywhite'), 0, {autoAlpha:0,ease:SteppedEase.easeOut});
+  tl.to($('#tim'), 0, {autoAlpha:0,ease:SteppedEase.easeOut});
+  tl.to($('#maskofhighlight'), 0, {autoAlpha:0,ease:SteppedEase.easeOut});
+ 
+ 
+
+  /*Frame3 - Change to visible*/
+  tl.to($('#entlogo'), 0.5, {autoAlpha:1,left:-30,ease:SteppedEase.easeOut,delay:0.4});
+  tl.to($('#entforWork'), 0.35, {autoAlpha:0,left:-500,ease:SteppedEase.easeOut},'-=0.37'); //left:79
+  tl.to($('#entendtext'), 0.35, {autoAlpha:1,left:220,ease:SteppedEase.easeOut},'-=0.4'); //left:49
+  tl.to($('#blue-button'), 0.2, {scale:0.7,ease:Back.easeOut});
+  tl.to($('#blue-button'), 0.2, {autoAlpha:1,scale:1.05,ease:SteppedEase.easeOut});
+  tl.to($('#blue-button'), 0.2, {scale:1,ease:SteppedEase.easeOut});
+  //tl.to($('.icon-effect'), 0.1, {autoAlpha:1,offset:1,left:200,ease:Strong.easeOut});
+  tl.to($('#replay'), 0.7, {autoAlpha:0.4,ease:SteppedEase.easeOut});
+
+}
+
+
+
+
+

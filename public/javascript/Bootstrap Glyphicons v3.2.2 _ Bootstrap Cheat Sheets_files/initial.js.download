@@ -1,0 +1,209 @@
+(function(window){
+
+
+/*--------- Set variables ---------*/
+var isIE10 = false;
+var isIE = (navigator.userAgent.indexOf("MSIE") != -1);
+var creative = {},
+    email1,email2;
+
+/*--------- Fallback for IE9 and lower ---------*/
+if (navigator.userAgent.indexOf("MSIE 10") > -1) {
+        // this is internet explorer 10
+        isIE10 = true; }
+if(isIE){
+    if(!isIE10){
+              var bod =   document.getElementsByTagName('body');
+              bod[0].setAttribute('class','IE');
+
+              var removeFrame1		= document.getElementById("frame1").style.display = 'none';
+              var removeFrame2		= document.getElementById("frame2").style.display = 'none';
+              var removeLogo      = document.getElementById("entlogo").style.display = 'none';
+              var removeFrame3		= document.getElementById("centering").style.display = 'none';
+              var removePreloader	= document.getElementById("entpreload").style.display = 'none';
+              // Load the backup image
+              var img 		= new Image();
+              var div     = document.getElementById("entcontainer");
+              img.onload	= function(){div.appendChild(img)};
+              img.src     = 'backup.gif';
+          	} 
+      	}
+/*--------- Setup namespace for ad ---------*/
+creative.init = function () {
+  creative.setupDOMElements();
+
+  if (Enabler.isInitialized()) {
+    creative.enablerInitHandler();
+  } else {
+    Enabler.addEventListener(
+      studio.events.StudioEvent.INIT,
+      creative.enablerInitHandler);
+  }
+};
+creative.setupDOMElements = function () {
+  creative.domElements = {};
+  creative.domElements.txtgmail	    = document.getElementById('enttxtgmail');
+  creative.domElements.txtredbutton = document.getElementById('red-button');
+  creative.domElements.background	= document.getElementById('entbg');
+  creative.domElements.imgpanel   = document.getElementById('entpanel');
+  //creative.domElements.txtinbox		= document.getElementById('enttxtinbox');
+  //creative.domElements.txtimportant = document.getElementById('enttxtimportant');
+  //creative.domElements.txtchats		= document.getElementById('enttxtchats');
+  creative.domElements.txtnewmsg	= document.getElementById('enttxtnewmsg');
+  creative.domElements.txtto 	    = document.getElementById('enttxtto');
+  creative.domElements.txtsubject	= document.getElementById('enttxtsubject');
+  creative.domElements.imglogo		= document.getElementById('entlogo');
+  creative.domElements.txtforwork	= document.getElementById('entforWork');
+  creative.domElements.txtblurb		= document.getElementById('entendtext');
+  creative.domElements.txtbluebtn	= document.getElementById('blue-button');
+  //creative.domElements.urlExit		= document.getElementById('bg-exit');
+  creative.domElements.email1     = document.getElementById('typed');
+  creative.domElements.email2     = document.getElementById('typed');
+};
+creative.dynamicDataAvailable = function () {
+  // NOTE: Here starts the pasted section from Studio.
+  // Dynamic Content variables and sample values
+    Enabler.setProfileId(1074850);
+    var devDynamicContent = {};
+	
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed= [{}];
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0]._id = 0;
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].id = 0;
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].reporting_label = "Default";
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].ad_id = "";
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].country = "";
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].is_default = true;
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].is_active = true;
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].img_728x90_only = {};
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].img_728x90_only.Type = "file";
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].img_728x90_only.Url = "https://s0.2mdn.net/ads/richmedia/studio/42338710/31230755_20160401131819404_728x90_img_panel_IN.png";
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].img_728x90_bg = {};
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].img_728x90_bg.Type = "file";
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].img_728x90_bg.Url = "728x90_background.png";
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].F1_txt_gmail = "Gmail";
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].F1_txt_redButton = "COMPOSE";
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].F1_txt_inbox = "Inbox (58)";
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].F1_txt_important = "Important";
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].F1_txt_chats = "Chats";
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].F2_txt_header = "New Message";
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].F2_txt_to = "To";
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].F2_txt_subject = "Subject";
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].F2_txt_email_1 = "puppyscrubbers@gmail.com";
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].F2_txt_email_2 = "tim@puppyscrubbers.com";
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].F2_fontsize_emails = 18;
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].F3_img_logo = {};
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].F3_img_logo.Type = "file";
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].F3_img_logo.Url = "logoasset.png";
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].F3_txt_title = "";
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].F3_fontweight_title = 600;
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].F3_fontsize_title = 20;
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].F3_txt_blurb = "Look more professional with custom email from Google Apps.";
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].F3_fontweight_blurb = 300;
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].F3_fontsize_blurb = 16;
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].F3_txt_cta = "Start free trial";
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].F3_fontweight_cta = 400;
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].F3_fontsize_cta = 14;
+    devDynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0].F3_button_color = "1075F4";
+    Enabler.setDevDynamicContent(devDynamicContent);
+/* Variable "dynamicContent" gets automatically initialized by Enabler.
+------Note: be sure to use "dynamicContent", not "devDynamicContent"------*/
+    creative.dynamicData = dynamicContent.GOA078_GizmaCam_ML_April_Update_Unified_Feed[0];
+
+// Setting Exit URL so it can be used in initial.js.
+	//creative.dynamicExitUrl = creative.dynamicData.url_landing_page.Url;
+/*Setting Dynamic Text - declare remaining texts here before adding to css*/
+	creative.domElements.txtgmail.innerHTML          = creative.dynamicData.F1_txt_gmail;
+	creative.domElements.txtredbutton.innerHTML      = creative.dynamicData.F1_txt_redButton;
+	//creative.domElements.txtinbox.innerHTML		= creative.dynamicData.F1_txt_inbox;
+	//creative.domElements.txtimportant.innerHTML = creative.dynamicData.F1_txt_important;
+	//creative.domElements.txtchats.innerHTML		= creative.dynamicData.F1_txt_chats;
+	creative.domElements.txtnewmsg.innerHTML         = creative.dynamicData.F2_txt_header;
+	creative.domElements.txtto.innerHTML             = creative.dynamicData.F2_txt_to;
+  creative.domElements.email1.style.fontSize = creative.dynamicData.F2_fontsize_emails + "px";
+  creative.domElements.email2.style.fontSize = creative.dynamicData.F2_fontsize_emails + "px";
+	creative.domElements.txtsubject.innerHTML        = creative.dynamicData.F2_txt_subject;
+	creative.domElements.txtforwork.innerHTML        = creative.dynamicData.F3_txt_title;
+  creative.domElements.txtforwork.style.fontWeight  = creative.dynamicData.F3_fontweight_title;
+  creative.domElements.txtforwork.style.fontSize    = creative.dynamicData.F3_fontsize_title + "px";
+	creative.domElements.txtblurb.innerHTML          = creative.dynamicData.F3_txt_blurb;
+  creative.domElements.txtblurb.style.fontWeight  = creative.dynamicData.F3_fontweight_blurb;
+  creative.domElements.txtblurb.style.fontSize    = creative.dynamicData.F3_fontsize_blurb + "px";
+	creative.domElements.txtbluebtn.innerHTML        = creative.dynamicData.F3_txt_cta;
+  creative.domElements.txtbluebtn.style.fontWeight  = creative.dynamicData.F3_fontweight_cta;
+  creative.domElements.txtbluebtn.style.fontSize    = creative.dynamicData.F3_fontsize_cta + "px";
+	creative.domElements.txtbluebtn.style.background = "#" + creative.dynamicData.F3_button_color;
+
+	// Start all actions which need to wait for polite loading here.
+	/*Setting Dynamic Image*/
+  creative.domElements.imgpanel.src = creative.dynamicData.img_728x90_only.Url;
+	creative.domElements.imglogo.src = creative.dynamicData.F3_img_logo.Url;
+	creative.domElements.background.src = creative.dynamicData.img_728x90_bg.Url;
+	// Show our ad once the external image was loaded
+  creative.domElements.imgpanel.addEventListener("load", creative.showAd.bind(creative), false);
+	creative.domElements.imglogo.addEventListener("load", creative.showAd.bind(creative), false);
+	creative.domElements.background.addEventListener("load", creative.showAd.bind(creative), false);
+}
+creative.enablerInitHandler = function (event) {
+  creative.dynamicDataAvailable();
+  //creative.domElements.cta.addEventListener('click', creative.exitClickHandler);
+  //creative.domElements.urlExit.addEventListener('click', creative.exitClickHandler);
+  // Hide preloader and show creative as soon as dynamic data is available and displayed. Currently we wait for
+  // the external image in polite.js to be loaded. Change if you want your creative to display as quickly as possible.
+  // creative.showAd();
+  if (Enabler.isPageLoaded()) {
+    creative.pageLoadHandler();
+  } else {
+    Enabler.addEventListener(
+      studio.events.StudioEvent.PAGE_LOADED, creative.pageLoadHandler);
+  }
+};
+/*
+creative.exitClickHandler = function (event) {
+  Enabler.exit('exit', creative.dynamicExitUrl);
+};
+*/
+var exitbutton = function(){
+  var self = this;
+  self = document.getElementById('bg-exit');
+
+  self.addEventListener('click', exiturl);
+  function exiturl(){
+    Enabler.exit('exit');
+  }
+}
+exitbutton();
+creative.pageLoadHandler = function (event) {
+  var external_css;
+  var external_javascript;
+
+  // Load in Javascript.
+  external_javascript = document.createElement('script');
+  external_javascript.setAttribute('type', 'text/javascript');
+  external_javascript.setAttribute('src', Enabler.getUrl('polite.js')); // Name of your Javascript file.
+  document.getElementsByTagName('head')[0].appendChild(external_javascript);
+
+  // Load in CSS.
+  external_css = document.createElement('link');
+  external_css.setAttribute('rel', 'stylesheet');
+  external_css.setAttribute('type', 'text/css');
+  external_css.setAttribute('href', Enabler.getUrl('style.css')); // Name of your CSS file.
+  document.getElementsByTagName('head')[0].appendChild(external_css);
+};
+// Is triggered when the background image in polite.js was fully loaded.
+creative.showAd = function () {
+  // Show content.
+  document.getElementById('entcontent').className = "show";
+  // Hide loader.
+  document.getElementById('entpreload').className = "hide";
+};
+
+
+// Start creative once all elements in window are loaded.
+window.addEventListener('load', creative.init.bind(creative));
+
+
+
+
+
+
+})(window);
