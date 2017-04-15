@@ -2,22 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Coupon;
 use App\Repositories\CouponRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
 class CouponController extends Controller
 {
-    private $couponRepository;
+    private $couponRepository, $userRepository;
 
-    function __construct(CouponRepository $couponRepository)
+    function __construct(CouponRepository $couponRepository,
+                         UserRepository $userRepository)
     {
         $this->couponRepository= $couponRepository;
+        $this->userRepository = $userRepository;
     }
 
 
 
     public function index()
     {
+        $data['data'] = Coupon::orderBy('activedate', 'desc')->paginate(20);
+        return view('pages.coupon.index', $data);
 
     }
 
@@ -28,7 +34,8 @@ class CouponController extends Controller
      */
     public function create()
     {
-        //
+        $data['user'] = $this->userRepository->checkbox();
+        return view('pages.coupon.create',$data);
     }
 
     /**
@@ -39,7 +46,13 @@ class CouponController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $data = $request->all();
+        $data['limit_usages'] = $data['usages'];
+        $ss = $this->couponRepository->storeCoupon($data);
+
+        if($ss) return redirect('coupon')->with('success',true);
+        else return redirect('coupon')->with('success',false);
     }
 
     /**
@@ -85,5 +98,15 @@ class CouponController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function detailusages(Request $request, $id)
+    {
+
+    }
+
+    public function usages()
+    {
+
     }
 }

@@ -45,4 +45,8 @@ class UserRepository
     public function addItem(Item $item){
         return Auth::user()->item()->save($item);
     }
+
+    public function checkbox(){
+        return User::all();
+    }
 }

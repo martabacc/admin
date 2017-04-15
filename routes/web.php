@@ -25,3 +25,6 @@ Route::get('verification/go', 'VerificationController@go');
 
 Route::resource('coupon','CouponController');
 
+Route::get('coupon/usages','CouponController@usages');
+Route::get('coupon/usages/{code}','CouponController@detailusages');
+

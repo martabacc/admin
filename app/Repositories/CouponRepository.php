@@ -22,14 +22,22 @@ class CouponRepository
     }
 
     public function checkCodeStatus($user_facing_coupon){
+
+        $coupon = $data['customerfacingcoupon'];
+        $user_id = $data['id_user'];
         $coupon = Coupon::where('customerfacingcoupon','=',$user_facing_coupon)
             ->firstOrFail();
         if(!$coupon) return response()->json([ 'status' => false, 'msg' => 'Kupon tersebut tidak ada']);
+        if($user_id != $coupon->id_user && $coupon->id_user ) return response()->json(['status'=>false, 'msg'=>'Anda tidak teregistrasi untuk kupon ini.']);
 
 //        check if now is greater than active date
         if($coupon->activedate->gt(Carbon::now())) return response()->json(['status'=>false, 'msg'=> 'Kupon ini belum berlaku']);
 //        check if now < expired date
         if($coupon->expiredate->lt(Carbon::now())) return response()->json(['status'=>false, 'msg'=> 'Kupon ini sudah kadaluarsa']);
+
+
+
+
 
 //        check usages
         if($coupon->usages<=0) return response()->json(['status'=>false,'msg'=> $this->defaultErrorMsg]);
@@ -47,7 +55,7 @@ class CouponRepository
     public function submitCode($data)
     {
 
-        $first = $this->checkCodeStatus($data['usercoupon']);
+        $first = $this->checkCodeStatus($data);
         if(is_array($first)) return $first;
 
         //      submit your own logic here
@@ -57,4 +65,11 @@ class CouponRepository
         return $result[0]->submit_coupon_code;
 
     }
+
+    public function storeCoupon($data)
+    {
+        return Coupon::create($data);
+    }
+
+
 }

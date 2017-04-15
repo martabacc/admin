@@ -26,57 +26,79 @@
                     </div>
                 @endif
 
-                <form method="post" action="{{ route('announcement.store') }}">
+                <form method="post" action="{{ route('coupon.store') }}">
                     <div class="box">
                         {{ csrf_field() }}
                         <div class="box-body">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <h3>Teks Kupon</h3>
-                                    <input type="text" name="name" class="form-control" id="inputEmail3" placeholder="Email">
+                                    <input type="text" name="customerfacingcoupon" class="form-control" id="inputEmail3" placeholder="Email">
                                 </div>
                             </div>
 
                             <div class="col-md-12">
-                                <div class="form-group">
-                                    <h3>Voucher Kupon</h3>
-                                    <input type="text" name="name" class="form-control" id="inputEmail3" placeholder="Email">
+                                <h3>Waktu Penggunaan</h3>
+                                <div class="col-md-6">
+                                    <!-- Date range -->
+                                    <div class="form-group">
+                                        <label>Batas Awal:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input type="text" class="form-control pull-right" id="reservation" name="activedate">
+                                        </div><!-- /.input group -->
+                                    </div><!-- /.form group -->
+                                </div>
+                                <div class="col-md-6">
+                                    <!-- Date range -->
+                                    <div class="form-group">
+                                        <label>Batas Akhir:</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input type="text" class="form-control pull-right" id="reservation2" name="expiredate">
+                                        </div><!-- /.input group -->
+                                    </div><!-- /.form group -->
                                 </div>
                             </div>
 
                             <div class="col-md-12">
-                                <h3>Isi Pengumuman</h3>
+                                <h3>Teks Ketentuan</h3>
                                 <div class="form-group">
-                                    <textarea class="textarea" placeholder="Place some text here" name="html_code" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                    <textarea class="textarea" placeholder="Place some text here" name="terms" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                                     <br>
                                 </div>
                             </div>
 
                             <div class="col-md-12">
-                                <h3>Waktu Pengumuman</h3>
-                                <div class="col-md-6">
-                                    <!-- Date range -->
-                                    <div class="form-group">
-                                        <label>Awal Pengumuman:</label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-calendar"></i>
-                                            </div>
-                                            <input type="text" class="form-control pull-right" id="reservation" name="start_time">
-                                        </div><!-- /.input group -->
-                                    </div><!-- /.form group -->
+                                <div class="form-group">
+                                    <h3>Batas Penggunaan</h3>
+                                    <input type="number" value="1" name="usages" class="form-control" id="inputEmail3" placeholder="Email">
                                 </div>
-                                <div class="col-md-6">
-                                    <!-- Date range -->
-                                    <div class="form-group">
-                                        <label>Akhir Pengumuman:</label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-calendar"></i>
-                                            </div>
-                                            <input type="text" class="form-control pull-right" id="reservation2" name="end_time">
-                                        </div><!-- /.input group -->
-                                    </div><!-- /.form group -->
+                            </div>
+
+
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <h3>Free Shipping</h3>
+                                    <label>
+                                        <input type="checkbox" class="minimal" name="free_shipping">
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <h3>Pilih user yang bisa menggunakan kupon ini</h3>
+                                    <select class="form-control select2" style="width: 100%;" name="id_user">
+                                        @foreach($user as $u)
+                                                <option value="{{ $u->id }}">{{ $u->name }}</option>
+                                            @endforeach
+                                    </select>
                                 </div>
                             </div>
 
@@ -102,10 +124,6 @@
     <script>
 
         $(function () {
-            // Replace the <textarea id="editor1"> with a CKEditor
-            // instance, using default configuration.
-//            CKEDITOR.replace('editor1');
-            //bootstrap WYSIHTML5 - text editor
             $(".textarea").wysihtml5();
         });
 
@@ -117,6 +135,8 @@
 //            timePicker: true,
             singleDatePicker: true,
         });
+
+        $('.select2').select2();
 
     </script>
 @stop

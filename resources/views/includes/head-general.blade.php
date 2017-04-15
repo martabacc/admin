@@ -17,6 +17,11 @@
 <link rel="stylesheet" href="{{ URL::to('assets/adminlte/plugins/iCheck/all.css') }}" type="text/css">
 <link href="{{ url('assets/css/pace.css') }}"rel="stylesheet">
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script> <!-- IE11 and Android native browser support -->
+<link rel="stylesheet" href="https://limonte.github.io/sweetalert2/dist/sweetalert2.min.css">
+<script src="https://limonte.github.io/sweetalert2/dist/sweetalert2.js"></script>
+
 <script type="text/javascript" src="{{ URL::to('assets/js/jquery-1.11.2.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::to('assets/js/jquery-ui.min.js') }}"></script>
 

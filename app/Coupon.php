@@ -6,12 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Coupon extends Model
 {
-    protected $tables = 'coupon';
+    protected $table = 'coupon';
     protected $primaryKey = 'coupon_id';
 
     protected $fillable = [
-        'customerfacingcoupon','backendfacingcoupon','activedate','expiredate','terms','usages','limit_usages',
-        'free_shipping','id_condition'
+        'customerfacingcoupon',
+        'activedate',
+        'expiredate',
+        'terms',
+        'usages',
+        'limit_usages',
+        'free_shipping',
+        'id_condition',
+        'id_user'
     ];
 
     /**
